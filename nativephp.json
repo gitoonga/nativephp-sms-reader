@@ -1,0 +1,36 @@
+{
+    "namespace": "SmsReader",
+    "bridge_functions": [
+        {
+            "name": "SmsReader.GetMessages",
+            "android": "com.atendwa.smsreader.SmsReaderFunctions.GetMessages",
+            "ios": "SmsReaderFunctions.GetMessages",
+            "description": "Read SMS messages from the Android inbox. Accepts optional sender, limit, and since (ms timestamp) filters."
+        }
+    ],
+    "events": [
+        "Atendwa\\SmsReader\\Events\\SmsReceived"
+    ],
+    "android": {
+        "min_version": 26,
+        "permissions": [
+            "android.permission.READ_SMS",
+            "android.permission.RECEIVE_SMS"
+        ],
+        "receivers": [
+            {
+                "name": "com.atendwa.smsreader.SmsReceiver",
+                "exported": false,
+                "intent_filters": [
+                    {
+                        "action": "android.provider.Telephony.SMS_RECEIVED"
+                    }
+                ]
+            }
+        ]
+    },
+    "ios": {
+        "min_version": "16.0",
+        "info_plist": {}
+    }
+}
